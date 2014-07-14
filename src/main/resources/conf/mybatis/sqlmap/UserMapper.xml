@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="COMMUNITY_USER">
+	<!-- 根据用户名查询用户登录信息 -->
+	<select id="SELECT" parameterType="String" resultType="com.ahpu.bean.User">
+		SELECT u.id,
+			   u.username,
+			   u.password,
+			   u.enable,
+			   u.role
+		from user u where u.username=#{username}
+	</select>
+	
+	<insert id="INSERT" parameterType="com.ahpu.bean.User">
+		INSERT INTO user(username,password,enable,role) VALUES(#{username},#{password},#{enable},#{role})
+	</insert>
+	
+	<update id="UPDATEPWD" parameterType="com.ahpu.bean.User">
+		UPDATE user SET password=#{password} WHERE username=#{username}
+	</update>
+	
+	<update id="UPDATEENABLE" parameterType="com.ahpu.bean.User">
+		UPDATE user SET enable=#{enable} WHERE username=#{username}
+	</update>
+	
+	<select id="SELECTBYENABLE" parameterType="String" resultType="com.ahpu.bean.User">
+		SELECT u.id,
+			   u.username,
+			   u.password,
+			   u.enable,
+			   u.role 
+		from user u where u.enable=#{enable}
+	</select>
+	
+	<select id="SELECTALL" resultType="com.ahpu.bean.User">
+		SELECT u.id,
+			   u.username,
+			   u.password,
+			   u.enable,
+			   u.role
+		from user u where 1=1
+	</select>
+	
+	<select id="CONUTNAME" resultType="Integer">
+		SELECT count(u.id)
+		from user u where u.username=#{username}
+	</select>
+	
+</mapper>

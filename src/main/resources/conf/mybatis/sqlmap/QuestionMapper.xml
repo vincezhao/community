@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="COMMUNITY_QUESTION">
+	
+	<insert id="INSERT" parameterType="com.ahpu.bean.Question">
+		INSERT INTO question(authorid,authorname,content,description,readcount,finished,answerid,createTime,modifyTime) VALUES(#{authorid},#{authorname},#{content},#{description},#{readcount},#{finished},#{answerid},#{createTime},#{modifyTime})
+	</insert>
+	
+	<select id="SELECTBYID" parameterType="Integer" resultType="com.ahpu.bean.Question">
+		SELECT q.questionid,
+			   q.authorid,
+			   q.authorname,
+			   q.content,
+			   q.description,
+			   q.readcount,
+			   q.finished,
+			   q.answerid,
+			   q.createTime,
+			   q.modifyTime 
+		from question q where q.questionid=#{questionid}
+	</select>	
+
+	<select id="SELECTBYAUTHORID" parameterType="Integer" resultType="com.ahpu.bean.Question">
+		SELECT q.questionid,
+			   q.authorid,
+			   q.authorname,
+			   q.content,
+			   q.description,
+			   q.readcount,
+			   q.finished,
+			   q.answerid,
+			   q.createTime,
+			   q.modifyTime 
+		from question q where q.authorid=#{authorid}
+	</select>
+
+	<select id="SELECTBYANSWERID" parameterType="Integer" resultType="com.ahpu.bean.Question">
+		SELECT q.questionid,
+			   q.authorid,
+			   q.authorname,
+			   q.content,
+			   q.description,
+			   q.readcount,
+			   q.finished,
+			   q.answerid,
+			   q.createTime,
+			   q.modifyTime 
+		from question q where q.answerid=#{answerid}
+	</select>
+
+	<select id="SELECTBYAUTHORNAME" parameterType="String" resultType="com.ahpu.bean.Question">
+		SELECT q.questionid,
+			   q.authorid,
+			   q.authorname,
+			   q.content,
+			   q.description,
+			   q.readcount,
+			   q.finished,
+			   q.answerid,
+			   q.createTime,
+			   q.modifyTime 
+		from question q where q.authorname=#{authorname}
+	</select>
+	
+	<select id="COUNTALL" resultType="Long">
+		SELECT count(q.questionid) 
+		from question q where 1=1
+	</select>
+	
+	<select id="COUNTFINISHED" resultType="Long">
+		SELECT count(q.questionid) 
+		from question q where q.finished=1
+	</select>	
+	
+	<select id="SELECTALL" resultType="com.ahpu.bean.Question">
+		SELECT q.questionid,
+			   q.authorid,
+			   q.authorname,
+			   q.content,
+			   q.description,
+			   q.readcount,
+			   q.finished,
+			   q.answerid,
+			   q.createTime,
+			   q.modifyTime 
+		from question q limit #{startIndex},#{length}
+	</select>
+				
+</mapper>

@@ -1,0 +1,51 @@
+create table user
+(
+   id                   int(4) not null auto_increment comment '会员编号',
+   username             varchar(255) unique comment '用户名',
+   password             varchar(255) comment '密码',
+   role                 varchar(20),
+   enable               varchar(20) comment '0:没权限，1:有权限',
+   primary key (id)
+);
+
+create table userinfo
+(
+   userid               bigint not null auto_increment,
+   username             varchar(250),
+   realname             varchar(250),
+   email                varchar(250),
+   avatar               varchar(250),
+   address              varchar(250),
+   telephone            varchar(250),
+   sex                  varchar(1),
+   communityid          int(4),
+   primary key (userid)
+);
+
+create table question
+(
+   questionid           bigint not null auto_increment,
+   author               bigint,
+   authorname           varchar(45),
+   content              varchar(1024),
+   readcount            int,
+   finished             int,
+   answerid             bigint,
+   createTime           timestamp,
+   modifyTime           timestamp,
+   primary key (questionid)
+);
+
+create table answer
+(
+   answerid             bigint not null auto_increment,
+   authorid             bigint,
+   username             varchar(250),
+   content              text,
+   readcount            int,
+   questionid           bigint,
+   priasecount          int,
+   createTime           timestamp,
+   modifyTime           timestamp,
+   primary key (answerid)
+);

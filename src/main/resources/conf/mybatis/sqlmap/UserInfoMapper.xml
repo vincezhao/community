@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="COMMUNITY_USERINFO">
+	<select id="SELECT" parameterType="String" resultType="com.ahpu.bean.UserInfo">
+		SELECT u.userid,
+			   u.username,
+			   u.realname,
+			   u.email,
+			   u.avatar,
+			   u.address,
+			   u.telephone,
+			   u.sex,
+			   u.communityid
+		from userinfo u where u.username=#{username}
+	</select>
+	
+	<select id="SELECTBYCOMMUNITYID" parameterType="Integer" resultType="com.ahpu.bean.UserInfo">
+		SELECT u.userid,
+			   u.username,
+			   u.realname,
+			   u.email,
+			   u.avatar,
+			   u.address,
+			   u.telephone,
+			   u.sex,
+			   u.communityid
+		from userinfo u where u.communityid=#{communityid}
+	</select>
+	
+	<insert id="INSERT" parameterType="com.ahpu.bean.UserInfo">
+		INSERT INTO userinfo(username,realname,email,avatar,address,telephone,sex,communityid) VALUES(#{username},#{realname},#{email},#{avatar},#{address},#{telephone},#{sex},#{communityid})
+	</insert>
+	
+	<update id="UPDATEBYID" parameterType="com.ahpu.bean.UserInfo">
+		UPDATE userinfo SET 
+			<if test="realname!=null">realname=#{realname}</if>
+			<if test="email!=null">,email=#{email}</if>
+			<if test="avatar!=null">,avatar=#{avatar}</if>
+			<if test="address!=null">,address=#{address}</if>
+			<if test="telephone!=null">,telephone=#{telephone}</if>
+			<if test="sex!=null">,sex=#{sex}</if>
+			<if test="communityid!=null">,communityid=#{communityid}</if>
+			WHERE userid=#{userid}
+	</update>
+	
+	<update id="UPDATEBYNAME" parameterType="com.ahpu.bean.UserInfo">
+		UPDATE userinfo SET 
+			<if test="realname!=null">realname=#{realname}</if>
+			<if test="email!=null">,email=#{email}</if>
+			<if test="avatar!=null">,avatar=#{avatar}</if>
+			<if test="address!=null">,address=#{address}</if>
+			<if test="telephone!=null">,telephone=#{telephone}</if>
+			<if test="sex!=null">,sex=#{sex}</if>
+			<if test="communityid!=null">,communityid=#{communityid}</if>
+			WHERE username=#{username}
+	</update>
+	
+</mapper>

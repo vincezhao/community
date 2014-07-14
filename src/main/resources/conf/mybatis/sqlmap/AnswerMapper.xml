@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="COMMUNITY_ANSWER">
+	<select id="SELECTBYNAME" parameterType="String" resultType="com.ahpu.bean.Answer">
+		SELECT a.authorid,
+			   a.username,
+			   a.content,
+			   a.readcount,
+			   a.questionid,
+			   a.priasecount,
+			   a.createTime,
+			   a.modifyTime
+		from answer a where a.username=#{username}
+	</select>
+	
+	<select id="SELECTBYQUESTIONID" parameterType="Long" resultType="com.ahpu.bean.Answer">
+		SELECT a.answerid,
+			   a.authorid,
+			   a.username,
+			   a.content,
+			   a.readcount,
+			   a.questionid,
+			   a.priasecount,
+			   a.createTime,
+			   a.modifyTime
+		from answer a where a.questionid=#{questionId}
+	</select>
+	
+	<insert id="INSERT" parameterType="com.ahpu.bean.Answer">
+		INSERT INTO answer(authorid,username,content,readcount,questionid,priasecount,createTime) VALUES(#{authorId},#{username},#{content},#{readcount},#{questionid},#{priasecount},#{createTime})
+	</insert>
+	
+</mapper>
